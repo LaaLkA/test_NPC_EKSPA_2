@@ -4,6 +4,7 @@ import core.Gardens.Garden;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Rabbit {
     private String name;
@@ -22,55 +23,52 @@ public class Rabbit {
 
     public void collect(ArrayList<Garden> gardens) {
         sortGardens(gardens);
-//        for (int trips = 1; trips < totalTrips; trips++) {
-//            if (!gardens.isEmpty()) {
-//                currentWeight = gardens.get(0).getCarrotWeight();
-//                if (currentWeight != maxWeight) {
-//                    for (int l = gardens.size() - 1; l > 0; l--) {
-//                        if (currentWeight + gardens.get(l).getCarrotWeight() == maxWeight) {
-//                            bag += currentWeight + gardens.get(l).getCarrotWeight();
-//                            gardens.remove(l);
-//                            gardens.remove(0);
-//                            break;
-//                        }
-//                    }
-//                } else {
-//                    bag += currentWeight;
-//                    gardens.remove(0);
-//                }
-//            } else {
-//                trips -= 1;
-//                System.out.println("Все полянки пустые. Кролик собрал " + bag + "кг моркови за " + trips + " ходки");
-//                break;
-//            }
-//        }
         int fieldIndex = 0;
-        int firshCarrotCnt = 0;
-        int secondCarrotCnt = 0;
-        for (int trips = 1; trips < totalTrips; trips++) {
-            if (!gardens.isEmpty()) {
+        int CarrotCnt;
+
+        for (int trips = 1; trips <= totalTrips; trips++) {
+            for (fieldIndex = 0; fieldIndex < gardens.size(); fieldIndex++) {
                 if (gardens.get(fieldIndex).getCarrotCount() != 0) {
-                    firshCarrotCnt = gardens.get(fieldIndex).getCarrotCount();
+                    CarrotCnt = gardens.get(fieldIndex).getCarrotCount();
                     currentWeight = gardens.get(fieldIndex).getCarrotWeight();
-                    gardens.get(fieldIndex).setCarrotCount(firshCarrotCnt - 1);
-                    if (currentWeight != maxWeight) {
+                    gardens.get(fieldIndex).setCarrotCount(CarrotCnt - 1);
+
+                    if (currentWeight == maxWeight) {
+                        bag += currentWeight;
+                        System.out.println(bag);
+                    } else {
                         for (int l = gardens.size() - 1; l > 0; l--) {
                             if (currentWeight + gardens.get(l).getCarrotWeight() == maxWeight) {
-                                secondCarrotCnt = gardens.get(l).getCarrotCount();
+                                CarrotCnt = gardens.get(l).getCarrotCount();
                                 bag += currentWeight + gardens.get(l).getCarrotWeight();
-                                if (secondCarrotCnt > 0){
-                                    gardens.get(l).setCarrotCount(secondCarrotCnt - 1);
-                                } gardens.remove(l);
-
-                                break;
+                                gardens.get(l).setCarrotCount(CarrotCnt - 1);
+                                System.out.println(bag);
                             }
                         }
-                    } else {
+
+                    }
+                }
+                if (gardens.get(fieldIndex).getCarrotCount() != 0) {
+                    CarrotCnt = gardens.get(fieldIndex).getCarrotCount();
+                    currentWeight = gardens.get(fieldIndex).getCarrotWeight();
+                    gardens.get(fieldIndex).setCarrotCount(CarrotCnt - 1);
+
+                    if (currentWeight == maxWeight) {
                         bag += currentWeight;
-                        gardens.remove(fieldIndex);
+                        System.out.println(bag);
+                    } else {
+                        for (int l = gardens.size() - 1; l > 0; l--) {
+                            if (currentWeight + gardens.get(l).getCarrotWeight() == maxWeight) {
+                                CarrotCnt = gardens.get(l).getCarrotCount();
+                                bag += currentWeight + gardens.get(l).getCarrotWeight();
+                                gardens.get(l).setCarrotCount(CarrotCnt - 1);
+                                System.out.println(bag);
+                            }
+                        }
                     }
                 }
             }
+            System.out.println(trips);
         }
     }
 

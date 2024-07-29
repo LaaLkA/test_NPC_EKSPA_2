@@ -12,7 +12,7 @@ public class Runner {
         Rabbit rabbit = new Rabbit("Tobby", 5, 10);
         ArrayList<Garden> gardens = new ArrayList<>();
         for (int i = 1; i < 6; i++){
-            System.out.println("Введите количество моркови на грядке " + (i + 1) + ": ");
+            System.out.println("Введите количество моркови на грядке " + (i) + ": ");
             gardens.add(new Garden(i,scanner.nextInt()));
         }
         System.out.println(gardens);
