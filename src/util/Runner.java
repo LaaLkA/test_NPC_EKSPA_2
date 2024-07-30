@@ -18,6 +18,7 @@ public class Runner {
         System.out.println(gardens);
 
         rabbit.collect(gardens);
+        System.out.println("Кролик собрал морковь!");
         rabbit.rabbitBag();
 
     }
